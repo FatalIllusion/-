@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d0a">
+  <title>The Eternal Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IM+Fell+English:ital@0;1&family=Marck+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="The Eternal Book">
+      <span class="brand-mark">✧</span>
+      <span>THE ETERNAL BOOK</span>
+    </a>
+    <div class="top-actions">
+      <button class="icon-btn" id="soundToggle" title="Звук" aria-label="Включить или выключить звук">♫</button>
+      <button class="icon-btn" id="settingsToggle" title="Настройки" aria-label="Настройки">⚙</button>
+      <button class="outline-btn" id="editToggle">✎ Редактор</button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <section class="intro">
+      <div class="eyebrow"><span></span> A COLLECTION OF WORDS & WORLDS <span></span></div>
+      <h1>Там, где живут <em>истории</em></h1>
+      <p>Некоторые книги читают. Другие — открывают.</p>
+    </section>
+
+    <section class="book-wrap" aria-label="Книга">
+      <div class="book-shadow"></div>
+      <div class="book" id="book">
+        <div class="spine"></div>
+        <article class="page left-page">
+          <div class="page-inner left-inner">
+            <div class="ornament">✦</div>
+            <p class="small-cap">THE ETERNAL BOOK</p>
+            <h2 class="left-title">Хранилище<br><em>вечности</em></h2>
+            <div class="rule"></div>
+            <p class="left-quote">«У каждой истории есть начало.<br>Но не у каждой — конец».</p>
+            <div class="page-number" id="leftNumber">✧</div>
+          </div>
+        </article>
+        <article class="page right-page">
+          <div class="page-inner" id="pageContent">
+            <div class="chapter-label" id="chapterLabel">ГЛАВА I · НАЧАЛО</div>
+            <h2 id="pageTitle">Первая страница</h2>
+            <div class="gold-rule"><span>✧</span></div>
+            <div class="page-text" id="pageText"></div>
+            <div class="page-number" id="rightNumber">01</div>
+          </div>
+        </article>
+      </div>
+      <div class="book-controls">
+        <button class="nav-btn" id="prevBtn" aria-label="Предыдущая страница">← <span>Назад</span></button>
+        <div class="page-indicator"><span id="currentPage">1</span><i>/</i><span id="totalPages">3</span></div>
+        <button class="nav-btn next" id="nextBtn" aria-label="Следующая страница"><span>Далее</span> →</button>
+      </div>
+    </section>
+
+    <div class="bottom-note"><span>❦</span> ЧИТАЙ НЕ СПЕША · КАЖДАЯ СТРАНИЦА ИМЕЕТ ЗНАЧЕНИЕ <span>❦</span></div>
+  </main>
+
+  <aside class="editor-panel" id="editorPanel" aria-hidden="true">
+    <div class="panel-head">
+      <div><span class="panel-kicker">LIBRARY TOOLS</span><h2>Редактор книги</h2></div>
+      <button class="close-btn" id="closeEditor" aria-label="Закрыть">×</button>
+    </div>
+    <div class="editor-layout">
+      <div class="page-list-wrap">
+        <div class="list-heading">СТРАНИЦЫ <button id="addPage" class="tiny-add">＋</button></div>
+        <div id="pageList" class="page-list"></div>
+      </div>
+      <div class="editor-fields">
+        <label>Название главы<input id="editTitle" maxlength="80" placeholder="Название страницы"></label>
+        <label>Номер / название раздела<input id="editChapter" maxlength="60" placeholder="ГЛАВА I · НАЧАЛО"></label>
+        <label>Содержание<textarea id="editText" rows="12" placeholder="Напиши свою историю..."></textarea></label>
+        <div class="editor-buttons">
+          <button class="gold-btn" id="savePage">Сохранить страницу</button>
+          <button class="danger-btn" id="deletePage">Удалить</button>
+        </div>
+        <p class="hint">Изменения сохраняются в этом браузере. Чтобы поделиться обновлённой книгой со всеми, экспортируй данные и добавь их в проект.</p>
+        <button class="subtle-btn" id="exportBook">↓ Экспорт книги (JSON)</button>
+        <label class="import-label">↑ Импорт книги (JSON)<input type="file" id="importBook" accept=".json,application/json"></label>
+      </div>
+    </div>
+  </aside>
+
+  <aside class="settings-panel" id="settingsPanel" aria-hidden="true">
+    <div class="panel-head"><div><span class="panel-kicker">PERSONALIZE</span><h2>Настройки чтения</h2></div><button class="close-btn" id="closeSettings">×</button></div>
+    <label>Шрифт текста
+      <select id="fontSelect">
+        <option value="serif">Классический</option>
+        <option value="fell">Старинный</option>
+        <option value="script">Рукописный</option>
+      </select>
+    </label>
+    <label>Размер текста <input id="fontSize" type="range" min="16" max="25" value="19"></label>
+    <label class="switch-row">Атмосферный звук <input id="ambienceToggle" type="checkbox"></label>
+    <label class="switch-row">Звук перелистывания <input id="pageSoundToggle" type="checkbox" checked></label>
+    <p class="hint">Звук создаётся браузером. Для его запуска сначала нажми на любой элемент страницы.</p>
+  </aside>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
